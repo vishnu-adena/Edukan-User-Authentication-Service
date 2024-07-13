@@ -26,21 +26,21 @@ class EdhukanUserServiceApplicationTests {
 
     @Test
     void test() {
-        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("edukan")
-                .clientSecret("$2a$12$a6lHyHh.Xlo5jGG4SMLv/.E0pTdUqvk/4okAp9PF.KdX20WXMAsO6")
-                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("http://localhost:3000/oauth/callback")
-                .postLogoutRedirectUri("http://localhost:3000/oauth/callback")
-                .scope(OidcScopes.OPENID)
-                .scope(OidcScopes.PROFILE)
-                .scope("ADMIN")
-                .scope("STUDENT")
-                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
-                .build();
-        registeredClientRepository.save(oidcClient);
+//        RegisteredClient oidcClient = RegisteredClient.withId(UUID.randomUUID().toString())
+//                .clientId("edukan1")
+//                .clientSecret("$2a$12$a6lHyHh.Xlo5jGG4SMLv/.E0pTdUqvk/4okAp9PF.KdX20WXMAsO6")
+//                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+//                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+//                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+//                .redirectUri("https://oauth.pstmn.io/v1/callback")
+//                .postLogoutRedirectUri("https://oauth.pstmn.io/v1/callback")
+//                .scope(OidcScopes.OPENID)
+//                .scope(OidcScopes.PROFILE)
+//                .scope("ADMIN")
+//                .scope("STUDENT")
+//                .clientSettings(ClientSettings.builder().requireAuthorizationConsent(true).build())
+//                .build();
+//        registeredClientRepository.save(oidcClient);
     }
 
 }
