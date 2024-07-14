@@ -154,16 +154,9 @@ public class JwtTokenProvider {
 
     public boolean validateToken(String token) {
         try {
-            // Parse and verify the token
-            Date date = new Date();
-            RSAKey rsaKey = getRSAKey();
-            RSAPublicKey publicKey = rsaKey.toRSAPublicKey();
 
-           Claims claims= (Claims) Jwts.parser()
-                    .setSigningKey(publicKey)
-                    .build()
-                    .parseClaimsJws(token);
-          return claims.getExpiration().before(Date.from(Instant.now()));
+           Claims claims= getClaimsFromToken(token);
+          return claims.getExpiration().after(Date.from(Instant.now()));
         } catch (Exception e) {
             // Handle exceptions such as expired or invalid tokens
             LOGGER.error("Invalid JWT token", e);
