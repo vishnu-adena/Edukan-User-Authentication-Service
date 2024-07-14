@@ -68,5 +68,20 @@ public class UserController {
 
     }
 
+    @GetMapping("validate-token")
+    public ResponseEntity<Object> validateToken(@RequestHeader Map<String, String> headers) throws UserNotFoundException, ParseException, JOSEException {
+        String token = "";
+        String authorization = headers.get("authorization");
+        if (Objects.equals(authorization, null)){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        }
+        if (authorization.startsWith("Bearer ")) {
+            token = authorization.substring(7);
+        }
+        Boolean validated = userService.validateToken(token);
+        return new ResponseEntity<>(validated,HttpStatus.OK);
+    }
+
 
 }

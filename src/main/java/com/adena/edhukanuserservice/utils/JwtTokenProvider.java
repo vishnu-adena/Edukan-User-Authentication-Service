@@ -151,4 +151,24 @@ public class JwtTokenProvider {
     public List<String> getRolesFromToken(String token) throws JOSEException {
         return getClaimsFromToken(token).get("roles", List.class);
     }
+
+    public boolean validateToken(String token) {
+        try {
+            // Parse and verify the token
+            Date date = new Date();
+            RSAKey rsaKey = getRSAKey();
+            RSAPublicKey publicKey = rsaKey.toRSAPublicKey();
+
+           Claims claims= (Claims) Jwts.parser()
+                    .setSigningKey(publicKey)
+                    .build()
+                    .parseClaimsJws(token);
+          return claims.getExpiration().before(Date.from(Instant.now()));
+        } catch (Exception e) {
+            // Handle exceptions such as expired or invalid tokens
+            LOGGER.error("Invalid JWT token", e);
+            return false;
+        }
+    }
+
 }

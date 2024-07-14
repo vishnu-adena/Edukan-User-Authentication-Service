@@ -12,4 +12,6 @@ public interface IUserService {
     boolean changePassword(PasswordChangeDTO passwordValue) throws InvalidPasswordException;
 
     SignUpResponseDTO getUser(String Token) throws UserNotFoundException, ParseException, JOSEException;
+
+    boolean validateToken(String token);
 }

@@ -62,4 +62,9 @@ public class UserService implements IUserService {
         SignUpResponseDTO signUpResponseDTO = new SignUpResponseDTO(userOptional);
         return signUpResponseDTO;
     }
+
+    @Override
+    public boolean validateToken(String token){
+        return jwtTokenProvider.validateToken(token);
+    }
 }
