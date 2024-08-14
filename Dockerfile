@@ -9,5 +9,5 @@ RUN mvn clean package -DskipTests
 # Step 2: Create a minimal distroless image for running the application
 FROM gcr.io/distroless/java21
 EXPOSE 8082
-COPY --from=build /app/target/edukanUserService-0.0.1.jar /app/edukanUserService.jar
+COPY --from=build /app/target/edukanUserService-1.0.0.jar /app/edukanUserService.jar
 ENTRYPOINT ["java", "-jar", "/app/edukanUserService.jar"]
