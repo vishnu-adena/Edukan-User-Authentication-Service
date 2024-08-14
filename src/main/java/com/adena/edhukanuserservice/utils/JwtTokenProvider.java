@@ -34,6 +34,9 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationMs}")
     private long jwtExpirationMs;
 
+    @Value("${app.jwtIssuer}")
+    private String jwtIssuer;
+
     @Autowired
     @Qualifier("jwkSource")
     private JWKSource<SecurityContext> jwkSource;
@@ -54,7 +57,7 @@ public class JwtTokenProvider {
         }
 
         Users user = userOptional.get();
-        user.getId().longValue();
+        user.getId();
         List<String> roles = user.getRoles().stream()
                 .map(Role::getRoleName)
                 .collect(Collectors.toList());
@@ -70,7 +73,7 @@ public class JwtTokenProvider {
                 .setAudience("edukan")
                 .notBefore(now)
                 .claim("scope", List.of("ADMIN"))
-                .issuer("http://localhost:8089") // Use a dynamic issuer value
+                .issuer(jwtIssuer) // Use a dynamic issuer value
                 .issuedAt(now)
                 .expiration(expiryDate)
                 .claim("roles", roles)
